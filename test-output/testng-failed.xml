@@ -5,7 +5,7 @@
     <classes>
       <class name="MyNewClass">
         <methods>
-          <include name="CheckboxTest_SelectSpecificByLabel"/>
+          <include name="CheckboxTest"/>
           <include name="Setup"/>
         </methods>
       </class> <!-- MyNewClass -->

@@ -1,36 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="5" passed="5" failed="0" skipped="0">
+<testng-results ignored="6" total="9" passed="2" failed="1" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-04-23T04:11:26 EET" name="Default suite" finished-at="2025-04-23T04:11:48 EET" duration-ms="21722">
+  <suite started-at="2025-04-26T03:39:27 EET" name="Default suite" finished-at="2025-04-26T03:39:36 EET" duration-ms="9266">
     <groups>
     </groups>
-    <test started-at="2025-04-23T04:11:26 EET" name="Default test" finished-at="2025-04-23T04:11:48 EET" duration-ms="21722">
+    <test started-at="2025-04-26T03:39:27 EET" name="Default test" finished-at="2025-04-26T03:39:36 EET" duration-ms="9266">
       <class name="MyNewClass">
-        <test-method is-config="true" signature="Setup()[pri:0, instance:MyNewClass@23fb172e]" started-at="2025-04-23T04:11:26 EET" name="Setup" finished-at="2025-04-23T04:11:33 EET" duration-ms="6549" status="PASS">
+        <test-method is-config="true" signature="Setup()[pri:0, instance:MyNewClass@25a6944c]" started-at="2025-04-26T03:39:27 EET" name="Setup" finished-at="2025-04-26T03:39:28 EET" duration-ms="929" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Setup -->
-        <test-method signature="RadioButton()[pri:1, instance:MyNewClass@23fb172e]" started-at="2025-04-23T04:11:33 EET" name="RadioButton" finished-at="2025-04-23T04:11:34 EET" duration-ms="675" status="PASS">
+        <test-method signature="AutoCompleteTest()[pri:4, instance:MyNewClass@25a6944c]" started-at="2025-04-26T03:39:28 EET" name="AutoCompleteTest" finished-at="2025-04-26T03:39:35 EET" duration-ms="7302" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- RadioButton -->
-        <test-method signature="DynamicDropDown()[pri:2, instance:MyNewClass@23fb172e]" started-at="2025-04-23T04:11:34 EET" name="DynamicDropDown" finished-at="2025-04-23T04:11:41 EET" duration-ms="6975" status="PASS">
+        </test-method> <!-- AutoCompleteTest -->
+        <test-method signature="StaticList()[pri:6, instance:MyNewClass@25a6944c]" started-at="2025-04-26T03:39:35 EET" name="StaticList" finished-at="2025-04-26T03:39:36 EET" duration-ms="346" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- DynamicDropDown -->
-        <test-method signature="PrintDynamicDropDown()[pri:3, instance:MyNewClass@23fb172e]" started-at="2025-04-23T04:11:41 EET" name="PrintDynamicDropDown" finished-at="2025-04-23T04:11:47 EET" duration-ms="6789" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- PrintDynamicDropDown -->
-        <test-method signature="CheckboxTest()[pri:4, instance:MyNewClass@23fb172e]" started-at="2025-04-23T04:11:47 EET" name="CheckboxTest" finished-at="2025-04-23T04:11:48 EET" duration-ms="423" status="PASS">
+        </test-method> <!-- StaticList -->
+        <test-method signature="CheckboxTest()[pri:8, instance:MyNewClass@25a6944c]" started-at="2025-04-26T03:39:36 EET" name="CheckboxTest" finished-at="2025-04-26T03:39:36 EET" duration-ms="618" status="FAIL">
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[The Checkboxbutton3 does not select expected [true] but found [false]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: The Checkboxbutton3 does not select expected [true] but found [false]
+at org.testng.Assert.fail(Assert.java:111)
+at org.testng.Assert.failNotEquals(Assert.java:1590)
+at org.testng.Assert.assertTrue(Assert.java:57)
+at MyNewClass.CheckboxTest(MyNewClass.java:160)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:687)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:995)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+at org.testng.TestRunner.privateRun(TestRunner.java:741)
+at org.testng.TestRunner.run(TestRunner.java:616)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CheckboxTest -->
-        <test-method signature="SelectSecondButtonOfCheckbox()[pri:5, instance:MyNewClass@23fb172e]" started-at="2025-04-23T04:11:48 EET" name="SelectSecondButtonOfCheckbox" finished-at="2025-04-23T04:11:48 EET" duration-ms="212" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- SelectSecondButtonOfCheckbox -->
       </class> <!-- MyNewClass -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
