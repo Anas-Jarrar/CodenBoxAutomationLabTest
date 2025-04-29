@@ -8,14 +8,22 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import netscape.javascript.JSException;
+
 import java.awt.RenderingHints.Key;
+import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 public class MyNewClass {
 
@@ -27,7 +35,7 @@ public class MyNewClass {
 	public void Setup() {
 		driver.manage().window().maximize();
 		driver.get(TheWebsite);
-
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));// wait maximum 3 seconds to find element
 	}
 
 	@Test(priority = 1, enabled = false)
@@ -94,7 +102,7 @@ public class MyNewClass {
 		}
 	}
 
-	@Test(priority = 4)
+	@Test(priority = 4, enabled = false)
 	public void AutoCompleteTest() throws InterruptedException {
 
 		String[] countries = { "jo", "ja", "sy" };
@@ -106,10 +114,8 @@ public class MyNewClass {
 		AutoComplete.sendKeys(Keys.chord(Keys.ARROW_DOWN, Keys.ENTER));
 
 	}
-	
-	
 
-	@Test(priority = 5,enabled=false)
+	@Test(priority = 5, enabled = false)
 	public void StaticDropDown() throws InterruptedException {
 
 		WebElement dropdown = driver.findElement(By.id("dropdown-class-example"));
@@ -121,34 +127,34 @@ public class MyNewClass {
 
 		}
 	}
-	@Test(priority = 6)
+
+	@Test(priority = 6, enabled = false)
 	public void StaticList() {
 		WebElement dropdown = driver.findElement(By.id("dropdown-class-example"));
-		Select Myselect= new Select(dropdown);
+		Select Myselect = new Select(dropdown);
 //		Myselect.selectByVisibleText("Appium");
 //		Myselect.selectByIndex(1);
 		Myselect.selectByValue("option3");
 		System.out.println(dropdown.findElements(By.tagName("option")).get(1).getText());
-		
+
 	}
-	
-	
-	@Test(priority=7,enabled=false)
+
+	@Test(priority = 7, enabled = false)
 	public void CheckboxTest1() {
-		WebElement Checkbox =driver.findElement(By.id("checkbox-example"));
-		List<WebElement> options=Checkbox.findElements(By.tagName("input"));
-		int index=rand.nextInt(options.size());
+		WebElement Checkbox = driver.findElement(By.id("checkbox-example"));
+		List<WebElement> options = Checkbox.findElements(By.tagName("input"));
+		int index = rand.nextInt(options.size());
 		options.get(index).click();
 	}
-	
-	@Test(priority = 8)
+
+	@Test(priority = 8, enabled = false)
 	// This test to make sure every checkbox Buttons are worked
 	public void CheckboxTest() {
-		JavascriptExecutor js=(JavascriptExecutor)driver;
+		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollTo(0,200)");
-		WebElement Checkbox =driver.findElement(By.id("checkbox-example"));
-		List<WebElement> options=Checkbox.findElements(By.tagName("input"));
-		for(int i=0;i<options.size();i++) {
+		WebElement Checkbox = driver.findElement(By.id("checkbox-example"));
+		List<WebElement> options = Checkbox.findElements(By.tagName("input"));
+		for (int i = 0; i < options.size(); i++) {
 			options.get(i).click();
 		}
 		WebElement Checkboxbutton1 = driver.findElement(By.xpath("//input[@name='checkBoxOption1']"));
@@ -174,6 +180,178 @@ public class MyNewClass {
 			}
 		}
 	}
-	
+
+	@Test(priority = 10, enabled = false)
+	public void OpenNewWindow() throws InterruptedException {
+
+		WebElement WindowButton = driver.findElement(By.id("openwindow"));
+
+		WindowButton.click();
+
+		Set<String> SwitchWindow = driver.getWindowHandles();
+		List<String> WidowsList = new ArrayList<>(SwitchWindow);
+		driver.switchTo().window(WidowsList.get(1));
+		Thread.sleep(1000);
+		System.out.println(driver.getTitle());
+		driver.switchTo().window(WidowsList.get(0));
+		Thread.sleep(1000);
+		System.out.println(driver.getTitle());
+
+	}
+
+	@Test(priority = 11, enabled = false)
+	public void OpenNewTab() throws InterruptedException {
+
+		WebElement TabButton = driver.findElement(By.id("opentab"));
+
+		TabButton.click();
+
+		Set<String> SwitchTab = driver.getWindowHandles();
+		List<String> TapList = new ArrayList<>(SwitchTab);
+		driver.switchTo().window(TapList.get(1));
+		Thread.sleep(1000);
+		System.out.println(driver.getTitle());
+		driver.switchTo().window(TapList.get(0));
+		Thread.sleep(1000);
+		System.out.println(driver.getTitle());
+
+	}
+
+	@Test(priority = 12, enabled = false)
+	public void AlertTest() throws InterruptedException {
+
+		WebElement AlertButton = driver.findElement(By.id("name"));
+		AlertButton.sendKeys("Anas Jarrar");
+		WebElement Alert = driver.findElement(By.id("alertbtn"));
+		Alert.click();
+		Thread.sleep(2000);
+		driver.switchTo().alert().accept();
+
+	}
+
+	@Test(priority = 13, enabled = false)
+	public void ConfirmTest() throws InterruptedException {
+
+		WebElement InputFieldForName = driver.findElement(By.id("name"));
+		InputFieldForName.sendKeys("Anas Jarrar");
+		WebElement confirm = driver.findElement(By.id("confirmbtn"));
+		confirm.click();
+		Thread.sleep(2000);
+		driver.switchTo().alert().dismiss();
+
+	}
+
+	@Test(priority = 14, enabled = false)
+	public void PrintTableData() {
+
+		WebElement Table = driver.findElement(By.id("product"));
+
+		List<WebElement> TableData = Table.findElements(By.tagName("tr"));
+		int RandomIndex = rand.nextInt(TableData.size());
+		System.out.println(TableData.get(RandomIndex).getText());
+
+	}
+
+	@Test(priority = 15, enabled = false)
+	public void printTableData() {
+
+		WebElement Table = driver.findElement(By.id("product"));
+
+		List<WebElement> TableData = Table.findElements(By.tagName("th"));
+		int RandomIndex = rand.nextInt(TableData.size());
+//		System.out.println(TableData.get(RandomIndex).getText());
+		for (int i = 0; i < TableData.size(); i++) {
+
+			System.out.println(TableData.get(i).getText());
+		}
+
+	}
+
+	@Test(priority = 16, enabled = false)
+	public void PrintPriceFromTable() {
+
+		WebElement Table = driver.findElement(By.id("product"));
+		List<WebElement> TableData = Table.findElements(By.tagName("td"));
+		for (int i = 2; i < TableData.size(); i = i + 3) {
+
+			System.out.println(TableData.get(i).getText());
+		}
+
+	}
+
+	@Test(priority = 17, enabled = false)
+	public void ElementDisplayedTest() throws InterruptedException {
+
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollTo(0,1500)");
+		WebElement ShowButton = driver.findElement(By.id("show-textbox"));
+		WebElement TextField = driver.findElement(By.id("displayed-text"));
+		WebElement HideButton = driver.findElement(By.id("hide-textbox"));
+		Thread.sleep(2000);
+		ShowButton.click();
+		Thread.sleep(2000);
+		TextField.sendKeys("Anas Jarrar");
+		Thread.sleep(2000);
+		HideButton.click();
+
+	}
+
+	@Test(priority = 18, enabled = false)
+	public void EnableDisableTest() throws InterruptedException {
+
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollTo(0,1700)");
+		WebElement EnableButton = driver.findElement(By.id("enabled-button"));
+		WebElement TextField = driver.findElement(By.id("enabled-example-input"));
+		WebElement DisableButton = driver.findElement(By.id("disabled-button"));
+		Thread.sleep(2000);
+		EnableButton.click();
+		Thread.sleep(2000);
+		TextField.sendKeys("Anas Jarrar");
+		Thread.sleep(2000);
+		DisableButton.click();
+		Thread.sleep(2000);
+
+	}
+
+	@Test(priority = 19, enabled = false)
+	public void MouseHovering() {
+
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollTo(0,1900)");
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		WebElement MouseHoverButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("mousehover")));
+		Actions action = new Actions(driver);
+		action.moveToElement(MouseHoverButton).perform();
+		WebElement TopButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Top")));
+		TopButton.click();
+		js.executeScript("window.scrollTo(0,1900)");
+		action.moveToElement(MouseHoverButton).click().perform();
+		WebElement RelodButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Reload")));
+		RelodButton.click();
+
+	}
+
+	@Test(priority = 20)
+	public void BokingCalenderNewTapTest() throws InterruptedException  {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollTo(0,2000)");
+		Thread.sleep(2000);
+		WebElement BookingButton =driver.findElement(By.linkText("Booking Calendar"));
+		BookingButton.click();
+		Set<String> handel = driver.getWindowHandles();
+		List<String> SwitchTap = new ArrayList(handel);
+		driver.switchTo().window(SwitchTap.get(1));
+		Thread.sleep(2000);
+		WebElement calender =driver.findElement(By.cssSelector(".datepick.wpbc_calendar"));
+
+		List<WebElement> TableOfDays = driver.findElements(By.tagName("td"));
+		for (int i = 0; i < TableOfDays.size(); i++) {
+
+			System.out.println(TableOfDays.get(i).getText());
+
+		}
+
+	}
 
 }
