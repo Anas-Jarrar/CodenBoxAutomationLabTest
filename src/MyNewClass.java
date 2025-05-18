@@ -70,7 +70,7 @@ public class MyNewClass {
 			DropDown.sendKeys(country.toLowerCase());
 
 			Thread.sleep(2000);
-			List<WebElement> options = driver.findElements(By.cssSelector(".ui-menu-item-wrapper"));
+			List<WebElement> options = driver.findElements(By.cssSelector(".ui-menu-item"));
 			boolean found = false;
 			for (int i = 0; i < options.size(); i++) {
 				if (options.get(i).getText().contentEquals(country)) {
@@ -95,7 +95,7 @@ public class MyNewClass {
 			DropDown.sendKeys(country.toLowerCase());
 
 			Thread.sleep(2000);
-			List<WebElement> options = driver.findElements(By.cssSelector(".ui-menu-item-wrapper"));
+			List<WebElement> options = driver.findElements(By.cssSelector(".ui-menu-item"));
 			for (int i = 0; i < options.size(); i++) {
 				System.out.println(options.get(i).getText());
 			}
@@ -116,7 +116,7 @@ public class MyNewClass {
 	}
 
 	@Test(priority = 5, enabled = false)
-	public void StaticDropDown() throws InterruptedException {
+	public void StaticDropDown() {
 
 		WebElement dropdown = driver.findElement(By.id("dropdown-class-example"));
 		List<WebElement> options = dropdown.findElements(By.tagName("option"));
@@ -148,8 +148,8 @@ public class MyNewClass {
 	}
 
 	@Test(priority = 8, enabled = false)
-	// This test to make sure every checkbox Buttons are worked
-	public void CheckboxTest() {
+	// This test to make sure all checkbox Buttons are worked
+	public void CheckboxTest2() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollTo(0,200)");
 		WebElement Checkbox = driver.findElement(By.id("checkbox-example"));
@@ -172,10 +172,10 @@ public class MyNewClass {
 		List<WebElement> options = driver.findElements(By.xpath("//input[@type='checkbox']"));
 
 		for (WebElement option : options) {
-			String value = option.getAttribute("value");
+			String value = option.getDomAttribute("value");
 			if (value.equalsIgnoreCase("option2")) {
 				option.click();
-				Assert.assertFalse(option.isSelected(), "Option2 checkbox should not be selected");
+				Assert.assertTrue(option.isSelected(), "Option2 of checkbox Buttons should be selected");
 				break;
 			}
 		}
@@ -254,11 +254,10 @@ public class MyNewClass {
 
 	@Test(priority = 15, enabled = false)
 	public void printTableData() {
-
 		WebElement Table = driver.findElement(By.id("product"));
 
 		List<WebElement> TableData = Table.findElements(By.tagName("th"));
-		int RandomIndex = rand.nextInt(TableData.size());
+//		int RandomIndex = rand.nextInt(TableData.size());
 //		System.out.println(TableData.get(RandomIndex).getText());
 		for (int i = 0; i < TableData.size(); i++) {
 
@@ -329,28 +328,49 @@ public class MyNewClass {
 		action.moveToElement(MouseHoverButton).click().perform();
 		WebElement RelodButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Reload")));
 		RelodButton.click();
-
 	}
 
-	@Test(priority = 20)
-	public void BokingCalenderNewTapTest() throws InterruptedException  {
+	@Test(priority = 20, enabled = false)
+	public void BokingCalenderNewTapTest() throws InterruptedException {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollTo(0,2000)");
 		Thread.sleep(2000);
-		WebElement BookingButton =driver.findElement(By.linkText("Booking Calendar"));
+		WebElement BookingButton = driver.findElement(By.linkText("Booking Calendar"));
 		BookingButton.click();
 		Set<String> handel = driver.getWindowHandles();
 		List<String> SwitchTap = new ArrayList(handel);
 		driver.switchTo().window(SwitchTap.get(1));
 		Thread.sleep(2000);
-		WebElement calender =driver.findElement(By.cssSelector(".datepick.wpbc_calendar"));
 
-		List<WebElement> TableOfDays = driver.findElements(By.tagName("td"));
+		WebElement calender = driver.findElement(By.cssSelector(".datepick.wpbc_calendar"));
+
+		List<WebElement> TableOfDays = calender.findElements(By.tagName("td"));
 		for (int i = 0; i < TableOfDays.size(); i++) {
 
 			System.out.println(TableOfDays.get(i).getText());
 
 		}
+	}
+
+	@Test(priority = 21, enabled = true)
+	public void IframeTest() throws InterruptedException {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollTo(0,2200)");
+		Thread.sleep(2000);
+		driver.switchTo().frame("iframe-name");
+
+		WebElement BurgerMenu = driver.findElement(By.cssSelector(".ct-mobile-meta-item.btn-nav-mobile.open-menu"));
+		BurgerMenu.click();
+		Set<String> Handels = driver.getWindowHandles();
+		List<String> Switch = new ArrayList(Handels);
+		driver.switchTo().window(Switch.get(0));
+		Thread.sleep(2000);
+		WebElement BookingButton = driver.findElement(By.linkText("Booking Calendar"));
+		BookingButton.click();
+		Set<String> Handels2 = driver.getWindowHandles();
+		List<String> Switch2 = new ArrayList(Handels2);
+		driver.switchTo().window(Switch2.get(1));
+		System.out.println(driver.getTitle());
 
 	}
 

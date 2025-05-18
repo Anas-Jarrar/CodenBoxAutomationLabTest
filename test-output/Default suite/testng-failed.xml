@@ -5,7 +5,7 @@
     <classes>
       <class name="MyNewClass">
         <methods>
-          <include name="BokingCalenderNewTapTest"/>
+          <include name="MouseHovering"/>
           <include name="Setup"/>
         </methods>
       </class> <!-- MyNewClass -->
